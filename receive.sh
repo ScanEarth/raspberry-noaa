@@ -25,7 +25,9 @@ fi
 # $6 = Time to capture
 # $7 = Satellite max elevation
 
-timeout "${6}" /usr/local/bin/rtl_fm -f "${2}"M -s 60k -g 50 -p 55 -E wav -E deemp -F 9 - | /usr/bin/sox -t raw -e signed -c 1 -b 16 -r 60000 - "${NOAA_AUDIO}/audio/${3}.wav" rate 11025
+sudo systemctl stop dump1090-mutability.service
+timeout "${6}" /usr/local/bin/rtl_fm -f "${2}"M -s 60k -T -g ${GAIN} -p ${PPM} -E wav -E deemp -F 9 - | /usr/bin/sox -t raw -e signed -c 1 -b 16 -r 60000 - "${NOAA_AUDIO}/audio/${3}.wav" rate 11025
+sudo systemctl start dump1090-mutability.service
 
 if [ ! -d "{NOAA_OUTPUT}/image/${FOLDER_DATE}" ]; then
 	mkdir -m 775 -p "${NOAA_OUTPUT}/image/${FOLDER_DATE}"
@@ -39,7 +41,7 @@ fi
 
 /usr/local/bin/wxmap -T "${1}" -H "${4}" -p 0 -l 0 -o "${PASS_START}" "${NOAA_HOME}/map/${3}-map.png"
 for i in $ENHANCEMENTS; do
-	/usr/local/bin/wxtoimg -o -m "${NOAA_HOME}/map/${3}-map.png" -e "$i" "${NOAA_AUDIO}/audio/${3}.wav" "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg"
+	/usr/local/bin/wxtoimg -I -c -o -m "${NOAA_HOME}/map/${3}-map.png" -e "$i" "${NOAA_AUDIO}/audio/${3}.wav" "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg"
 	/usr/bin/convert -quality 90 -format jpg "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg" -undercolor black -fill yellow -pointsize 18 -annotate +20+20 "${1} $i ${START_DATE}" "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg"
 done
 if [ -n "$CONSUMER_KEY" ]; then
