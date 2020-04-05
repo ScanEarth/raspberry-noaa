@@ -30,7 +30,7 @@ success() {
 
 ### Verify cloned repo
 if [ ! -e "$HOME/raspberry-noaa" ]; then
-        die "Is https://github.com/reynico/raspberry-noaa cloned in your home directory?"
+        die "Is https://github.com/ScanEarth/raspberry-noaa cloned in your home directory?"
 fi
 
 ### Install required packages
