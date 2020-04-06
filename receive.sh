@@ -2,9 +2,9 @@
 
 
 ## import common lib
-. "$HOME/.noaa.conf"
-. "$HOME/.tweepy.conf"
-. "$NOAA_HOME/common.sh"
+. ~/.noaa.conf
+. ~/.tweepy.conf
+. "${NOAA_HOME}/common.sh"
 
 
 ## pass start timestamp and sun elevation
@@ -29,7 +29,7 @@ sudo systemctl stop dump1090-mutability.service
 timeout "${6}" /usr/local/bin/rtl_fm -f "${2}"M -s 60k -T -g ${GAIN} -p ${PPM} -E wav -E deemp -F 9 - | /usr/bin/sox -t raw -e signed -c 1 -b 16 -r 60000 - "${NOAA_AUDIO}/audio/${3}.wav" rate 11025
 sudo systemctl start dump1090-mutability.service
 
-if [ ! -d "{NOAA_OUTPUT}/image/${FOLDER_DATE}" ]; then
+if [ ! -d "${NOAA_OUTPUT}/image/${FOLDER_DATE}" ]; then
 	mkdir -m 775 -p "${NOAA_OUTPUT}/image/${FOLDER_DATE}"
 fi
 

@@ -36,7 +36,6 @@ if [ ! -d "${NOAA_OUTPUT}" ]; then
 	mkdir -m 775 -p "${NOAA_OUTPUT}"
 fi
 
-
 if [ ! -d "${METEOR_OUTPUT}" ]; then
 	mkdir -m 775 -p "${METEOR_OUTPUT}"
 fi
@@ -58,5 +57,5 @@ if [ ! -d "${NOAA_HOME}/predict/" ]; then
 fi
 
 if [ ! -d "${NOAA_OUTPUT}/image/${FOLDER_DATE}" ]; then
-        mkdir -m 775 -p "${NOAA_OUTPUT}/image/${FOLDER_DATE}"
+    mkdir -m 775 -p "${NOAA_OUTPUT}/image/${FOLDER_DATE}"
 fi

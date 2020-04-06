@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ## import common lib
-. "$HOME/.noaa.conf"
-. "$HOME/.tweepy.conf"
-. "$NOAA_HOME/common.sh"
+. ~/.noaa.conf
+. ~/.tweepy.conf
+. "${NOAA_HOME}/common.sh"
 
 ## pass start timestamp and sun elevation
 PASS_START=$(expr "$5" + 90)
