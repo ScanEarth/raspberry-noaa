@@ -39,9 +39,9 @@ else
 	ENHANCEMENTS="ZA MCIR MCIR-precip"
 fi
 
-/usr/local/bin/wxmap -T "${1}" -H "${4}" -p 0 -l 0 -o "${PASS_START}" "${NOAA_HOME}/map/${3}-map.png"
+/usr/local/bin/wxmap -T "${1}" -H "${4}" -p 0 -g 0.0 -l 0 -o "${PASS_START}" "${NOAA_HOME}/map/${3}-map.png"
 for i in $ENHANCEMENTS; do
-	/usr/local/bin/wxtoimg -I -c -o -m "${NOAA_HOME}/map/${3}-map.png" -e "$i" "${NOAA_AUDIO}/audio/${3}.wav" "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg"
+	/usr/local/bin/wxtoimg -I -n -c -o -m "${NOAA_HOME}/map/${3}-map.png" -e "$i" "${NOAA_AUDIO}/audio/${3}.wav" "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg"
 	/usr/bin/convert -quality 90 -format jpg "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg" -undercolor black -fill yellow -pointsize 18 -annotate +20+20 "${1} $i ${START_DATE}" "${NOAA_OUTPUT}/image/${FOLDER_DATE}/${3}-$i.jpg"
 done
 if [ -n "$CONSUMER_KEY" ]; then
